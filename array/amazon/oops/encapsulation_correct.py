@@ -18,4 +18,4 @@ person = Person('John', 40)
 person.display()
 #changing age using setter
 person.setAge(45)
-person.getAge()[-]
+person.getAge()
