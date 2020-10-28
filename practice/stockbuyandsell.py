@@ -1,20 +1,30 @@
-def buyandsell(A,n):
-    i=0
+# Python3 program to find the smallest
+# elements missing in a sorted array.
 
-    if len(A) < 2:
-        return 0
-    minp = A[0]
-    p = 0
-    for a in A[1:]:
-        p = max(p, a - minp)
-        minp = min(minp, a)
-    return p
+def findFirstMissing(array, start, end):
+
+	if (start > end):
+		return end + 1
+
+	if (start != array[start]):
+		return start;
+
+	mid = int((start + end) / 2)
+
+	# Left half has all elements
+	# from 0 to mid
+	if (array[mid] == mid):
+		return findFirstMissing(array,
+						mid+1, end)
+
+	return findFirstMissing(array,
+						start, mid)
 
 
+# driver program to test above function
+arr = [0, 2, 1, 3, 9, 5, 6, 7,4, 10]
+n = len(arr)
+print("Smallest missing element is",
+	findFirstMissing(arr, 0, n-1))
 
-
-
-
-price = [10,11,14,16,34,23,12,34,35,24,25,100]
-n = len(price)
-print(buyandsell(price,n))
+# This code is contributed by Smitha Dinesh Semwal
