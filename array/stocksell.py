@@ -41,14 +41,15 @@ def stockBuySell(price, n):
         profit=price[sell]-price[buy]
         a[profit]="Buy on day: ", buy,"Sell on day: ", sell
     print(a)
-    #for key,value in a.items():
-    #    print(key,value)
+    res = max(a, key=a.get)
+
+    print(res)
 
     # Driver code
 
 
 # Stock prices on consecutive days
-price = [100,11,14,16,34,23,13,34,35,24,25,23]
+price = [100, 180, 260, 310, 40, 535, 695]
 n = len(price)
 
 # Fucntion call

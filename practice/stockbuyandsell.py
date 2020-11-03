@@ -1,30 +1,44 @@
-# Python3 program to find the smallest
-# elements missing in a sorted array.
+# Python3 implementation of the approach
 
-def findFirstMissing(array, start, end):
+# Function to return the maximum profit
+# that can be made after buying and
+# selling the given stocks
+def maxProfit(price, start, end):
+	# If the stocks can't be bought
+	if (end <= start):
+		return 0
 
-	if (start > end):
-		return end + 1
+	# Initialise the profit
+	profit = 0
 
-	if (start != array[start]):
-		return start;
+	# The day at which the stock
+	# must be bought
+	for i in range(start, end):
 
-	mid = int((start + end) / 2)
+		# The day at which the
+		# stock must be sold
+		for j in range(i + 1, end + 1,1):
 
-	# Left half has all elements
-	# from 0 to mid
-	if (array[mid] == mid):
-		return findFirstMissing(array,
-						mid+1, end)
+			# If byuing the stock at ith day and
+			# selling it at jth day is profitable
+			if (price[j] > price[i]):
+				# Update the current profit
+				curr_profit = price[j] - price[i] + \
+							  maxProfit(price, start, i - 1) + \
+							  maxProfit(price, j + 1, end)
 
-	return findFirstMissing(array,
-						start, mid)
+				# Update the maximum profit so far
+				profit = max(profit, curr_profit)
+
+	print(start,end)
+	return profit
 
 
-# driver program to test above function
-arr = [0, 2, 1, 3, 9, 5, 6, 7,4, 10]
-n = len(arr)
-print("Smallest missing element is",
-	findFirstMissing(arr, 0, n-1))
+# Driver code
+if __name__ == '__main__':
+	price = [100, 180, 260, 310, 40, 535, 695]
+	n = len(price)
 
-# This code is contributed by Smitha Dinesh Semwal
+	print(maxProfit(price, 0, n - 1))
+
+# This code is contributed by Rajput-Ji
